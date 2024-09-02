@@ -166,7 +166,7 @@ async def show_api_dialog(app, lines):
     await asyncio.sleep(2)
     layout = BoxLayout(orientation='vertical')
     layout.add_widget(Label(text='Для работы бота нужно ввести API_ID и API_HASH'))
-    layout.add_widget(Label(text='Ссылка на YouTube: youtu.be'))
+    layout.add_widget(Label(text='Ссылка на YouTube: https://youtu.be/JBDnmEhvgac?si=uAlTiw6O3CwKKBlM'))
 
     api_id_layout = BoxLayout(orientation='horizontal')
     api_id_input = TextInput(hint_text='API_ID')
