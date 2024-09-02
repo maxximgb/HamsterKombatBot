@@ -254,7 +254,7 @@ def save_settings(filename):
             setattr(settings, key, a)
             f.write(f"{key} = {a}\n")
     update_env_from_settings(filename, ".env")
-    show_restart_popup()
+    show_restart_popup("Настройки сохранены, перезапустите для применения настроек.")
 
 
 def update_env_from_settings(settings_file, env_file):
@@ -287,15 +287,15 @@ def update_env_from_settings(settings_file, env_file):
     with open(env_file, 'w', encoding='utf-8') as f:
         f.writelines(new_env_content)
 
-def show_restart_popup():
+def show_restart_popup(title):
     layout = BoxLayout(orientation='vertical')
-    label = Label(text="Перезапустите приложение для применения настроек")
+    label = Label(text=title)
     button = Button(text="OK", size_hint=(1, 0.25))
 
     layout.add_widget(label)
     layout.add_widget(button)
 
-    popup = Popup(title="Settings Saved",
+    popup = Popup(title=title,
                   content=layout,
                   size_hint=(None, None), size=(400, 200),
                   auto_dismiss=False)
@@ -340,6 +340,8 @@ async def run_script():
                 error_label = Label(text="Перезапустите приложение и создайте сессии перед запуском",
                                     color=(1, 0, 0, 1))
                 layout.add_widget(error_label)
+                await asyncio.sleep(3)
+                show_restart_popup("Перезапустите приложение и создайте сессии перед запуском")
                 return
             await run_tasks(tg_clients=tg_clients, app=app, saved_layout=saved_layout)
 
