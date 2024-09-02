@@ -160,6 +160,7 @@ async def check_and_run_script(app):
         await run_script()
     else:
         await show_api_dialog(app, env_dict.values())
+        show_restart_popup("Перезапустите приложение для применения изменений")
 
 
 async def show_api_dialog(app, lines):
